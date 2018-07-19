@@ -1,0 +1,6 @@
+data/formatted
+venv
+log
+*.pyc
+.DS_Store
+.vscode
