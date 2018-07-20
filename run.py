@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-import shutil
-import json
+import os, sys, shutil, json
 import pandas as pd
 from pymongo import MongoClient
 from slugify import slugify
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Const
 RAW_DATA_DIR = './data/raw/'
