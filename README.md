@@ -31,4 +31,4 @@ bash run.sh
 
 After processing and formatting, the data will be saved also into JSON files inside **formatted** directory inside data. 
 
-Developed with love by **[Arianit Hetemi](https://github.com/arianithetemi)**
+Developed with ❤ by **[Arianit Hetemi](https://github.com/arianithetemi)**
