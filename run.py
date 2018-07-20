@@ -29,6 +29,7 @@ else:
 def process_data(df, y, muni):
     # Year dict
     year_d = {y: []}
+    arr = []
 
     print "Processing " + muni + " - " + y
 
@@ -56,7 +57,13 @@ def process_data(df, y, muni):
         fd['municipality'] = municipality
         fd['slugify'] = sl_d
 
+        arr.append(fd)
+
         year_d[y].append(fd)
+
+    # Saving as JSON in files
+    save_in_json(municipality, y, arr)
+    print "Saved as JSON " + municipality + " - " + y
 
     return year_d
 
@@ -68,14 +75,13 @@ def save_in_json(muni, year, data):
     if not os.path.exists(muni_formatted_dir):
         os.makedirs(muni_formatted_dir)
 
-    with open(year_muni_formatted_file, 'w') as outfile:
-        json.dump(data, outfile)
+    with open(year_muni_formatted_file, 'w') as f:
+        json.dump(data, f)
 
 # Processing and importing
 for muni in os.listdir(RAW_DATA_DIR):
     if not muni.startswith('.'):
         for csv_file in os.listdir(RAW_DATA_DIR + muni):
-
             if not csv_file.startswith('.'):
 
                 year = csv_file.split('.')[0]
@@ -86,10 +92,6 @@ for muni in os.listdir(RAW_DATA_DIR):
 
                 # Processing Data
                 data = process_data(df, year, muni)
-
-                # Saving as JSON files
-                save_in_json(muni, year, data)
-                print "Saved as JSON " + muni + " - " + year
 
                 # Importing into Database
                 coll.insert(data)
